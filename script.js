@@ -11,6 +11,15 @@ $(document).ready(function () {
   });
 });
 
+$(document).on('mouseenter', '#data-list li', function () {
+  $('#data-list li').removeClass('active');
+  $(this).addClass('active');
+});
+
+$(document).on('mouseleave', '#data-list li', function () {
+  $('#data-list li').removeClass('active');
+});
+
 function filterDataList(dataList, input) {
   var lonDataList = dataList.length;
   var i = 0;
@@ -22,6 +31,8 @@ function filterDataList(dataList, input) {
       $('#data-list').append('<li>' + dataList[i] + '</li>');
     }
   }
+
+  $($('#data-list li')[0]).addClass('active');
 }
 
 var dataList = [
