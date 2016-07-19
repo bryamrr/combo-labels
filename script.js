@@ -31,6 +31,15 @@ $(document).on('click', '#data-list li', function () {
   $('#combo-labels').val('');
 
   calcInputWidth();
+  $('#combo-labels').focus();
+});
+
+$(window).click(function() {
+  $('#data-list li').remove();
+});
+
+$('#data-list').click(function(event){
+    event.stopPropagation();
 });
 
 function filterDataList(dataList, input) {
@@ -66,7 +75,7 @@ function calcInputWidth() {
   var containerWidth = $('.input-container').width();
   var itemsWidth = $('#selected-items').width();
 
-  $('.input-container input').width(containerWidth - 6 - itemsWidth);
+  $('.input-container input').width(containerWidth - 7 - itemsWidth);
 }
 
 var dataList = [
