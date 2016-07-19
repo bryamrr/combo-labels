@@ -5,3 +5,48 @@
 li.active {
   background-color: #EEE;
 }
+
+#selected-items {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+#selected-items li {
+  display: inline-block;
+  background-color: #a48ad5;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin-right: 4px;
+  font-size: 14px;
+  font-weight: 300;
+  color: white;
+  padding: 3px 6px;
+}
+
+#combo-labels {
+  border: none;
+  height: 25px;
+}
+#combo-labels:focus {
+  outline: 0;
+}
+
+.input-container {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 4px;
+}
+
+#data-list {
+  border: 1px solid black;
+  border-top: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+#data-list li {
+  list-style-type: none;
+  padding: 4px 8px;
+}
