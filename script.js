@@ -46,9 +46,9 @@ $(document).keypress(function(e) {
     }
   }
 });
-$(document).keyup(function(e) {
+$(document).keydown(function(e) {
   if ($('#combo-labels').is(":focus")) {
-    if (e.keyCode == 8) {
+    if (e.keyCode == 8 && $('#combo-labels').val() == '') {
       removeLastItem();
     }
   }
