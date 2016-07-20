@@ -26,16 +26,40 @@ $(document).on('click', '#data-list li', function () {
   var id = $(this).data("id");
   var title = $(this).text();
 
-  $('#selected-items').append('<li data-id="' + id + '">' + title + '</li>');
+  $('#selected-items').append('<li data-id="' + id + '">' + title + '<span>x</span></li>');
   removeItemFromList(id);
-  $('#combo-labels').val('');
+});
 
-  calcInputWidth();
-  $('#combo-labels').focus();
+$(document).on('click', '#selected-items span', function () {
+  var id = $(this).parent().data("id");
+  var title = $(this).parent().text();
+
+  removeItemFromSelected(id, title);
+});
+
+$(document).keypress(function(e) {
+  if ($('#combo-labels').is(":focus")) {
+    if (e.which == 13) {
+      var id = $(".active").data('id');
+      addItemWithId(id);
+      removeItemFromList(id);
+    }
+  }
+});
+$(document).keyup(function(e) {
+  if ($('#combo-labels').is(":focus")) {
+    if (e.keyCode == 8) {
+      removeLastItem();
+    }
+  }
 });
 
 $(window).click(function() {
   $('#data-list li').remove();
+});
+
+$( window ).resize(function() {
+  calcInputWidth();
 });
 
 $('#data-list').click(function(event){
@@ -68,6 +92,18 @@ function removeItemFromList(id) {
       break;
     }
   }
+
+  $('#combo-labels').val('');
+
+  calcInputWidth();
+  $('#combo-labels').focus();
+}
+
+function removeItemFromSelected(id, title) {
+  $('#selected-items li[data-id =' + id + ']').remove();
+
+  title = title.substring(0, title.length - 1);
+  dataList.push({ id: id, title: title });
 }
 
 function calcInputWidth() {
@@ -76,6 +112,27 @@ function calcInputWidth() {
   var itemsWidth = $('#selected-items').width();
 
   $('.input-container input').width(containerWidth - 7 - itemsWidth);
+}
+
+function addItemWithId(id) {
+  var lonDataList = dataList.length;
+  var i = 0;
+
+  for (i; i < lonDataList; i++) {
+    if (dataList[i].id === parseInt(id)) {
+      $('#selected-items').append('<li data-id="' + id + '">' + dataList[i].title + '<span>x</span></li>');
+    }
+  }
+}
+
+function removeLastItem() {
+  var id = $('#selected-items li').last().data('id');
+  var title = $('#selected-items li').last().text();
+  title = title.substring(0, title.length - 1);
+
+  $('#selected-items li').last().remove();
+
+  dataList.push({ id: id, title: title });
 }
 
 var dataList = [
